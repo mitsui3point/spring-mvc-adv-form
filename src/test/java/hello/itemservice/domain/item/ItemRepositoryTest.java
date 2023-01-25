@@ -3,9 +3,10 @@ package hello.itemservice.domain.item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ItemRepositoryTest {
 
@@ -54,8 +55,18 @@ class ItemRepositoryTest {
         Item savedItem = itemRepository.save(item);
         Long itemId = savedItem.getId();
 
+        Boolean isOpen = true;
+        List<String> regions = Arrays.asList("KOREA", "USA", "UK", "SPAIN");
+        ItemType food = ItemType.FOOD;
+        DeliveryCode deliveryFast = new DeliveryCode("FAST", "빠른 배송");
+
         //when
+
         Item updateParam = new Item("item2", 20000, 30);
+        updateParam.setOpen(isOpen);
+        updateParam.setRegions(regions);
+        updateParam.setItemType(food);
+        updateParam.setDeliveryCode(deliveryFast.getCode());
         itemRepository.update(itemId, updateParam);
 
         Item findItem = itemRepository.findById(itemId);
@@ -64,5 +75,10 @@ class ItemRepositoryTest {
         assertThat(findItem.getItemName()).isEqualTo(updateParam.getItemName());
         assertThat(findItem.getPrice()).isEqualTo(updateParam.getPrice());
         assertThat(findItem.getQuantity()).isEqualTo(updateParam.getQuantity());
+
+        assertThat(findItem.getOpen()).isEqualTo(updateParam.getOpen());
+        assertThat(findItem.getRegions()).isEqualTo(updateParam.getRegions());
+        assertThat(findItem.getItemType()).isEqualTo(updateParam.getItemType());
+        assertThat(findItem.getDeliveryCode()).isEqualTo(updateParam.getDeliveryCode());
     }
 }

@@ -32,6 +32,11 @@ public class ItemRepository {
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
+
+        findItem.setOpen(updateParam.getOpen());//판매 여부
+        findItem.setRegions(updateParam.getRegions());//등록 지역
+        findItem.setItemType(updateParam.getItemType());//상품 종류
+        findItem.setDeliveryCode(updateParam.getDeliveryCode());//배송 방식
     }
 
     public void clearStore() {
