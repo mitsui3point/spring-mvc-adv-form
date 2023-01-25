@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,20 @@ public class FormItemController {
     @ModelAttribute("itemTypes")
     public ItemType[] itemTypes() {
         return ItemType.values();
+    }
+
+    /**
+     * FAST: 빠른 배송
+     * NORMAL: 일반 배송
+     * SLOW: 느린 배송
+     */
+    @ModelAttribute("deliveryCodes")
+    public List<DeliveryCode> deliveryCodes() {
+        return Arrays.asList(
+                new DeliveryCode("FAST", "빠른 배송"),
+                new DeliveryCode("NORMAL", "일반 배송"),
+                new DeliveryCode("SLOW", "느린 배송")
+        );
     }
 
     @GetMapping
