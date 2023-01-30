@@ -1,6 +1,7 @@
 package hello.itemservice.domain.item;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,6 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemRepositoryTest {
 
     ItemRepository itemRepository = new ItemRepository();
+
+
+    @BeforeEach
+    void setUp() {
+        itemRepository.clearStore();
+    }
 
     @AfterEach
     void afterEach() {
